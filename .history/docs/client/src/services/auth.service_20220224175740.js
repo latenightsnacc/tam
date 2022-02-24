@@ -20,7 +20,7 @@ class AuthService {
         localStorage.removeItem("user");
     }
     
-    register(username,email,password) {
+    register = (username,email,password) => {
         return Axios.post(API_URL+"signup", {
             username,
             email,
@@ -28,11 +28,16 @@ class AuthService {
         });
     }
     
-    getCurrentUser (){
+    getCurrentUser = () => {
         return JSON.parse(localStorage.getItem("user"));
     }
 }
 
 
 
-export default new AuthService();
+export default {
+    register,
+    login,
+    logout,
+    getCurrentUser
+};

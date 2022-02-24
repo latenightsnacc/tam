@@ -12,16 +12,24 @@ class App extends Component {
       showCoordinatorDashboard: false,
       showPresidentDashboard:false,
       showSecretaryGeneralDashboard: false,
-      showTreasurerDashboard: false,
-      currentUser: undefined
+      showTreasurerDashboard: false
     }
   }
-  
+  const [logout, setLogout] = useState();
+  const [state, setState] = useState({
+    showMemberDashboard: false,
+    showTreasurerDashboard: false,
+    showSecretaryGeneral: false,
+    showPresidentDashboard: false,
+    showCoordinatorDashboard: false,
+    currentUser: undefined
+  });
+
   componentDidMount() {
     const user = AuthService.getCurrentUser();
 
     if(user) {
-      this.setState({
+      setState({
         currentUser: AuthService.getCurrentUser(),
         showMemberDashboard: user.roles.include('ROLE_MEMBER'),
         showSecretaryGeneralDashboard: user.roles.include('ROLE_SECRETARY_GENERAL'),
@@ -31,18 +39,13 @@ class App extends Component {
       })
     }
   }
-  logout() {
-    AuthService.logout();
-  }
-  render() {
-    const { currentUser, showPresidentDashboard, showSecretaryGeneralDashboard, showTreasurerDashboard, showCoordinatorDashboard} = this.state;
-    return (
-      <div className="App">
+  return (
+    <div className="App">
+      {showMemberDashboard && (
         
-      </div>
-    );
-  }
-  
+      )}
+    </div>
+  );
 }
 
 export default App;

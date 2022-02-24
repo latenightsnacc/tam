@@ -35,7 +35,7 @@ class App extends Component {
     AuthService.logout();
   }
   render() {
-    const { currentUser, showPresidentDashboard, showSecretaryGeneralDashboard, showTreasurerDashboard, showCoordinatorDashboard} = this.state;
+    const { currentUser, showPresidentDashboard, showSecretaryGeneralDashboard, showTreasurerDashboard, showCoordinatorDashboard}
     return (
       <div className="App">
         

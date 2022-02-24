@@ -28,11 +28,16 @@ class AuthService {
         });
     }
     
-    getCurrentUser (){
+    getCurrentUser = () => {
         return JSON.parse(localStorage.getItem("user"));
     }
 }
 
 
 
-export default new AuthService();
+export default {
+    register,
+    login,
+    logout,
+    getCurrentUser
+};

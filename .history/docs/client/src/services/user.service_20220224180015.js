@@ -20,7 +20,7 @@ getSecretaryGeneralDashboard() {
  getPresidentDashboard() {
         return Axios.get(API_URL+"president", {headers: authHeader() });
     }
- getCoordinatorDashboard() {
+ getCoordinatorDashboard() => {
         return Axios.get(API_URL+"coordinator", {headers: authHeader() });
     }
 

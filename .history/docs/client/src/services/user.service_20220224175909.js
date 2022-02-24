@@ -4,27 +4,34 @@ import authHeader from "./auth-header";
 const API_URL = "http://localhost:8080/api/dashboard/";
 
 class UserService {
-    getPublicContent() {
+    const getPublicContent = () => {
         return Axios.get(API_URL+"all");
 }
 
- getMemberDashboard() {
+const  getMemberDashboard =() => {
         return Axios.get(API_URL+"member", {headers: authHeader() });
     }
-getTreasurerDashboard () {
+const getTreasurerDashboard = () => {
         return Axios.get(API_URL+"treasurer", {headers: authHeader() });
     }
-getSecretaryGeneralDashboard() {
+const getSecretaryGeneralDashboard = () => {
         return Axios.get(API_URL+"secretarygeneral", {headers: authHeader() });
     }
- getPresidentDashboard() {
+const  getPresidentDashboard = () => {
         return Axios.get(API_URL+"president", {headers: authHeader() });
     }
- getCoordinatorDashboard() {
+const  getCoordinatorDashboard = () => {
         return Axios.get(API_URL+"coordinator", {headers: authHeader() });
     }
 
 }
 
 
-export default new UserService();
+export default {
+    getPublicContent,
+    getMemberDashboard,
+    getTreasurerDashboard,
+    getSecretaryGeneralDashboard,
+    getPresidentDashboard,
+    getCoordinatorDashboard
+};

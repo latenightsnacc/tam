@@ -2,7 +2,7 @@ import Axios from "axios";
 
 const API_URL = "http://localhost:8080/api/auth/";
 class AuthService {
-    login(username, password) {
+    login (username, password) =>{
         return Axios
         .post(API_URL+"signin", {
             username,
@@ -16,11 +16,11 @@ class AuthService {
         });
     }
     
-    logout()  {
+    logout = () => {
         localStorage.removeItem("user");
     }
     
-    register(username,email,password) {
+    register = (username,email,password) => {
         return Axios.post(API_URL+"signup", {
             username,
             email,
@@ -28,11 +28,16 @@ class AuthService {
         });
     }
     
-    getCurrentUser (){
+    getCurrentUser = () => {
         return JSON.parse(localStorage.getItem("user"));
     }
 }
 
 
 
-export default new AuthService();
+export default {
+    register,
+    login,
+    logout,
+    getCurrentUser
+};

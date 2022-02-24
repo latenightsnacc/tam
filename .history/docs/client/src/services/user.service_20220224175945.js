@@ -11,16 +11,16 @@ class UserService {
  getMemberDashboard() {
         return Axios.get(API_URL+"member", {headers: authHeader() });
     }
-getTreasurerDashboard () {
+getTreasurerDashboard = () => {
         return Axios.get(API_URL+"treasurer", {headers: authHeader() });
     }
-getSecretaryGeneralDashboard() {
+getSecretaryGeneralDashboard = () => {
         return Axios.get(API_URL+"secretarygeneral", {headers: authHeader() });
     }
- getPresidentDashboard() {
+ getPresidentDashboard = () => {
         return Axios.get(API_URL+"president", {headers: authHeader() });
     }
- getCoordinatorDashboard() {
+ getCoordinatorDashboard = () => {
         return Axios.get(API_URL+"coordinator", {headers: authHeader() });
     }
 
