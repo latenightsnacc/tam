@@ -13,9 +13,11 @@ const Register = () => {
         handleSubmit, 
         getValues, 
         formState: {errors}
-    } = useForm();
+    } = useForm({
+        resolver: yupResolver(validationSchema)
+    });
 
-    const onSubmit = data => {
+    const onSubmit = e => {
         // e.preventDefault();
         console.log(data);
     }
@@ -45,7 +47,7 @@ const Register = () => {
                         className={'border-0 text-xs md:text-sm w-full text-gray-700  py-2 px-2 leading-loose font-medium focus:ring-0 focus:outline-0 text-uppercase'}
                         placeholder={'Deborah'}
                         onChange={''}
-                        required />
+                        />
                     </div>
                   <div className="msg my-2">
                     <p className="text-red-500 text-xs italic">{errors.firstname && errors.firstname?.message}</p>
@@ -221,6 +223,9 @@ const Register = () => {
                 <div className="flex w-full flex-col">
                   <button 
                   type="submit"
+                  onSubmit={() => {
+                      const values = getValues();
+                      setData(values)}}
                   className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                    Create Profile
                   </button>

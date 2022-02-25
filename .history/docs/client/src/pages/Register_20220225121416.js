@@ -45,7 +45,7 @@ const Register = () => {
                         className={'border-0 text-xs md:text-sm w-full text-gray-700  py-2 px-2 leading-loose font-medium focus:ring-0 focus:outline-0 text-uppercase'}
                         placeholder={'Deborah'}
                         onChange={''}
-                        required />
+                        />
                     </div>
                   <div className="msg my-2">
                     <p className="text-red-500 text-xs italic">{errors.firstname && errors.firstname?.message}</p>

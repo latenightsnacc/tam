@@ -6,6 +6,18 @@ import Footer from "../components/Footer";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
 
+const validationSchema =    yup.object().shape({
+    firstname: yup.string().required('Firstname is required!'),
+    surname: yup.string().required('Surname is required!'),
+    batch: yup.string().required('Batch is required!'),
+    statecode: yup.string().max(11, 'Statecode must not exceed 11 characters!').required('Statecode is required!'),
+    cds: yup.string().required('Please select your C.D.S Gorup'),
+    lga: yup.string().required('Local Government Area is required!'),
+    ppa: yup.string().required('Place of Primary Assignment is required!'),
+    email: yup.string().email('Email is invalid!').required('Email is required!'),
+    phone_no: yup.number().max(11, 'Phone number must not exceed 11 characters!').required('Phone number is required!'),
+    profile_pic: yup.string().required('Profile picture is required!'),
+});
 const Register = () => {
     const [data, setData] = useState({});
     const { 
@@ -13,10 +25,12 @@ const Register = () => {
         handleSubmit, 
         getValues, 
         formState: {errors}
-    } = useForm();
+    } = useForm({
+        resolver: yupResolver(validationSchema)
+    });
 
-    const onSubmit = data => {
-        // e.preventDefault();
+    const onSubmit = (e) => {
+        e.preventDefault();
         console.log(data);
     }
   return(
@@ -31,6 +45,12 @@ const Register = () => {
             </div>
               <div className="w-full max-w-lg">
               <form onSubmit={handleSubmit(onSubmit)} className="bg-white sm:shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                  <div className="my-10">
+                  <input type={'text'} placeholder={'text here'} {...register("exampleRequired", { required: true })} />
+                {/* errors will return when field validation fails  */}
+                {errors.exampleRequired && <span>This field is required</span>}
+                  </div>
+              
                   <div className="mb-4">
                     <div className={`relative group py-2 rounded text-sm w-full shadow-sm border border-1 border-gray-300  appearance-none rounded focus:outline-none focus:shadow-outline focus:border hover:border-2 hover:border-green-400`}>
                         <div className="absolute -top-3">
@@ -41,12 +61,13 @@ const Register = () => {
                         <input 
                         type={'text'}
                         name={'firstname'}
-                        {...register("firstname")}
+                        {...register("firstname", { required: true, message: 'Firstname is required!' })}
                         className={'border-0 text-xs md:text-sm w-full text-gray-700  py-2 px-2 leading-loose font-medium focus:ring-0 focus:outline-0 text-uppercase'}
                         placeholder={'Deborah'}
                         onChange={''}
-                        required />
+                        />
                     </div>
+                    {errors.firstname && <p className="text-red-500 text-xs italic">Firstname is required!</p>}
                   <div className="msg my-2">
                     <p className="text-red-500 text-xs italic">{errors.firstname && errors.firstname?.message}</p>
                   </div>
@@ -219,9 +240,7 @@ const Register = () => {
                 
                 
                 <div className="flex w-full flex-col">
-                  <button 
-                  type="submit"
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                    Create Profile
                   </button>
                   <button

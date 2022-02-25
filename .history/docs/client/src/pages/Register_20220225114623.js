@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -6,18 +6,32 @@ import Footer from "../components/Footer";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
 
+
 const Register = () => {
-    const [data, setData] = useState({});
+    const validationSchema =    yup.object().shape({
+        firstname: yup.string().required(),
+        surname: yup.string().required('Surname is required!'),
+        batch: yup.string().required('Batch is required!'),
+        statecode: yup.string().max(11, 'Statecode must not exceed 11 characters!').required('Statecode is required!'),
+        cds: yup.string().required('Please select your C.D.S Gorup'),
+        lga: yup.string().required('Local Government Area is required!'),
+        ppa: yup.string().required('Place of Primary Assignment is required!'),
+        email: yup.string().email('Email is invalid!').required('Email is required!'),
+        phone_no: yup.string().max(11, 'Phone number must not exceed 11 characters!').required('Phone number is required!'),
+        profile_pic: yup.string().required('Profile picture is required!'),
+    });
     const { 
         register, 
         handleSubmit, 
         getValues, 
         formState: {errors}
-    } = useForm();
+    } = useForm({
+        resolver: yupResolver(validationSchema)
+    });
 
-    const onSubmit = data => {
-        // e.preventDefault();
-        console.log(data);
+    const onSubmit = (data, e) => {
+        e.preventDefault();
+        console.log(JSON.stringify(data, null, 2))
     }
   return(
     <>
@@ -41,14 +55,16 @@ const Register = () => {
                         <input 
                         type={'text'}
                         name={'firstname'}
-                        {...register("firstname")}
+                        {...register("firstname", { required: true, message: 'Firstname is required!' })}
                         className={'border-0 text-xs md:text-sm w-full text-gray-700  py-2 px-2 leading-loose font-medium focus:ring-0 focus:outline-0 text-uppercase'}
                         placeholder={'Deborah'}
                         onChange={''}
-                        required />
+                        required
+                        />
                     </div>
+                    {errors.firstname && <p className="text-red-500 text-xs italic">Firstname is required!</p>}
                   <div className="msg my-2">
-                    <p className="text-red-500 text-xs italic">{errors.firstname && errors.firstname?.message}</p>
+                    <p className="text-red-500 text-xs italic">{errors.firstname?.message}</p>
                   </div>
                 
                 </div>
@@ -67,7 +83,7 @@ const Register = () => {
                     onChange={''}
                     required />
                     <div className="msg mt-2 hidden">
-                    <p className="text-red-500 text-xs italic">{errors.surname?.message}</p>
+                    <p className="text-red-500 text-xs italic">Please enter your password.</p>
                     </div>
                 </div>
                 <div className="relative group py-2 mb-4 rounded text-sm w-full shadow-sm border border-1 border-gray-300  appearance-none rounded focus:outline-none focus:shadow-outline focus:border hover:border-2 hover:border-green-400">
@@ -217,18 +233,18 @@ const Register = () => {
                     </div>
                 </div>
                 
-                
+                <input type={'text'} {...register("exampleRequired", { required: true })} />
+      {/* errors will return when field validation fails  */}
+      {errors.exampleRequired && <span>This field is required</span>}
                 <div className="flex w-full flex-col">
-                  <button 
-                  type="submit"
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                    Create Profile
                   </button>
                   <button
-                    type="submit"
+                    type="button"
                     onClick={() => {
                         const values = getValues();
-                        setData(values)}}
+                        console.log(values)}}
                     className="btn btn-warning float-right"
                 >
                 Reset
