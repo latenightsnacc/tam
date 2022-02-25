@@ -1,0 +1,30 @@
+import Axios from 'axios';
+import { Component, useState } from 'react';
+import AuthService from './services/auth.service';
+import Login from './pages/Login';
+import Register from './pages/Register'
+const App = () => {
+  const [showMemberDashboard, setMemberDashboard] = useState(false);
+  const [showTreasurerDashboard, setTreasurerDashboard] = useState(false);
+  const [showSecretaryGeneralDashboard, setSecretaryGeneralDashboard] = useState(false);
+  const [showPresidentDashboard, setPresidentDashboard] = useState(false);
+  const [showCoordinatorDashboard, setCoordinatorDashboard] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  
+  
+  logout() {
+    AuthService.logout();
+  }
+  render() {
+    const { currentUser, showPresidentDashboard, showSecretaryGeneralDashboard, showTreasurerDashboard, showCoordinatorDashboard} = this.state;
+    return (
+      <div className="App">
+        
+      </div>
+    );
+  }
+  
+}
+
+export default App;
