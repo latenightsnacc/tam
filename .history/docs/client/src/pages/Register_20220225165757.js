@@ -8,6 +8,7 @@ import Container from "../components/Container";
 import Layout from "../components/Layout";
 
 const Register = () => {
+    const [data, setData] = useState({});
     const { 
         register, 
         handleSubmit, 
@@ -18,15 +19,7 @@ const Register = () => {
     const onSubmit = data => {
         // e.preventDefault();
         console.log(data);
-        try{
-            Axios.post('http://localhost:5000/corpers', data)
-            .then( response => {
-                console.log(response);
-            })
-        } catch(e){
-            console.log(e)
-        }
-        
+        Axios.post('http://')
         
     }
   return(
@@ -234,7 +227,15 @@ const Register = () => {
                   className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                    Create Profile
                   </button>
-
+                  <button
+                    type="submit"
+                    onClick={() => {
+                        const values = getValues();
+                        setData(values)}}
+                    className="btn btn-warning float-right"
+                >
+                Reset
+                    </button>
                   <span className="inline-block mt-2 align-baseline font-bold text-xs text-green-500 hover:text-green-800 text-center">
                     Already have a profile? Login
                   </span>

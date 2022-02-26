@@ -34,7 +34,7 @@ const Users = db.define("corpers", {
     password: {
         type: DataTypes.STRING
     },
-    profile_pic: {
+    profile: {
         type: DataTypes.STRING
     },
     refresh_token: {

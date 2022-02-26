@@ -16,25 +16,10 @@ const Users = db.define("corpers", {
     statecode: {
         type: DataTypes.STRING
     },
-    cds_group: {
-        type: DataTypes.STRING
-    },
-    lga: {
-        type: DataTypes.STRING
-    },
-    ppa: {
-        type: DataTypes.STRING
-    },
     email: {
         type: DataTypes.STRING
     },
-    phone_no: {
-        type: DataTypes.STRING
-    },
     password: {
-        type: DataTypes.STRING
-    },
-    profile_pic: {
         type: DataTypes.STRING
     },
     refresh_token: {

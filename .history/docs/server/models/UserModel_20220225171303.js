@@ -28,13 +28,10 @@ const Users = db.define("corpers", {
     email: {
         type: DataTypes.STRING
     },
-    phone_no: {
+    email: {
         type: DataTypes.STRING
     },
     password: {
-        type: DataTypes.STRING
-    },
-    profile_pic: {
         type: DataTypes.STRING
     },
     refresh_token: {

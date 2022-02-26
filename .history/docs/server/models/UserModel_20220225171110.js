@@ -13,28 +13,13 @@ const Users = db.define("corpers", {
     batch: {
         type: DataTypes.STRING
     },
-    statecode: {
-        type: DataTypes.STRING
-    },
-    cds_group: {
-        type: DataTypes.STRING
-    },
-    lga: {
-        type: DataTypes.STRING
-    },
-    ppa: {
+    batch: {
         type: DataTypes.STRING
     },
     email: {
         type: DataTypes.STRING
     },
-    phone_no: {
-        type: DataTypes.STRING
-    },
     password: {
-        type: DataTypes.STRING
-    },
-    profile_pic: {
         type: DataTypes.STRING
     },
     refresh_token: {
