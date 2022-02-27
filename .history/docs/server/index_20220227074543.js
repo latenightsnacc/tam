@@ -9,10 +9,9 @@ app.use(cors({origin: "http://localhost:3000"}))
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-db.sequelize.sync();
-// .then(() => {
-//     console.log("Drop and re-sync db");
-// });
+db.sequelize.sync().then(() => {
+    console.log("Drop and re-sync db");
+});
 
 app.get("/", (req,res) => {
     res.json({message: "NYSC CDS E-ATTENDANCE BUILT BY DEBTHEBUILDER"})

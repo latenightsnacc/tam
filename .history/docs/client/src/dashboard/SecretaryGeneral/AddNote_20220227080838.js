@@ -73,8 +73,8 @@ const AddNote = () => {
             date: note.date,
             month: date.month,
             year: date.year,
-            startTime: note.startTime,
-            endTime: note.endTime,
+            start: note.startTime,
+            end: note.end,
             venue: note.venue,
             topic: note.topic,
             minutes: note.minutes
@@ -89,8 +89,8 @@ const AddNote = () => {
                     date: response.data.date,
                     month: response.data.month,
                     year: response.data.year,
-                    startTime: response.data.startTime,
-                    endTime: response.data.endTime,
+                    start: response.data.start,
+                    end: response.data.end,
                     venue: response.data.venue,
                     topic: response.data.topic,
                     minutes: response.data.minutes
@@ -186,7 +186,6 @@ const AddNote = () => {
                     </div>
                     <div className="flex flex-col md:flex-row md:justify-between mb-4">
                         <div className="flex flex-col md:flex-row md:items-center">
-                            {/* TYPE OF EVENT */}
                             <div className="mb-4 md:mr-4">
                                 <div className={`relative group py-2 rounded text-sm w-full shadow-sm border border-1 border-gray-300  appearance-none rounded focus:outline-none focus:shadow-outline focus:border hover:border-2 hover:border-green-400`}>
                                     <div className="absolute -top-3">

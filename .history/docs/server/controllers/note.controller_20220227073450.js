@@ -10,14 +10,14 @@ exports.create = (req, res) => {
         return;
     }
     const note = {
-        author: req.body.author,
-        cdsGroup: req.body.cdsGroup,
+        author: req.body.type,
+        cds: req.body.type,
         type: req.body.type,
         date: req.body.date,
         month: req.body.month,
         year: req.body.year,
-        startTime: req.body.startTime,
-        endTime: req.body.endTime,
+        start: req.body.start,
+        end: req.body.end,
         venue: req.body.venue,
         topic: req.body.topic,
         minutes: req.body.minutes
@@ -25,7 +25,6 @@ exports.create = (req, res) => {
     Note.create(note).then(data => {
         res.send(data);
     }).catch(err => {
-        console.log(err);
         res.status(500).send({
             message:
                 err.message || "Some error occured while creating note!"
@@ -37,7 +36,6 @@ exports.findAll = (req,res) => {
     Note.findAll().then(data => {
         res.send(data);
     }).catch(err => {
-        console.log(err);
         res.status(500).send({
             message:
                 err.message || "Some error occured while retrieving all notes!"
@@ -56,7 +54,6 @@ exports.findOne = (req, res) => {
             })
         }
     }).catch(err => {
-        console.log(err)
         res.status(500).send({
             message: `Error retrieving Tutorial with id=${id}`
         })
@@ -79,7 +76,6 @@ exports.update = (req, res) => {
             });
         }
     }).catch(err => {
-        console.log(err)
         res.status(500).send({
             message: `Error updating Note with id=${id}`
         })

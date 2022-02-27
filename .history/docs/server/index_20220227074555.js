@@ -9,8 +9,8 @@ app.use(cors({origin: "http://localhost:3000"}))
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-db.sequelize.sync();
-// .then(() => {
+// db.sequelize.sync()
+.then(() => {
 //     console.log("Drop and re-sync db");
 // });
 

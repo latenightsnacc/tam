@@ -10,14 +10,12 @@ import Layout from "../../components/Layout";
 
 const AddNote = () => {
     const initialNoteState = {
-        author:'',
-        cdsGroup: '',
         type: '',
         date: '',
         month: '',
         year: '',
-        startTime: '',
-        endTime: '',
+        start: '',
+        end: '',
         venue: '',
         topic: '',
         minutes: '' 
@@ -31,7 +29,17 @@ const AddNote = () => {
     const [topic, setTopic] = useState({
         display: 'hidden'
     });
-    const [note, setNote] = useState(initialNoteState);
+    const [note, setNote] = useState({
+        author: '',
+        cdsGroup: '',
+        type: '',
+        date:'',
+        startTime: '',
+        endTime: '',
+        venue: '',
+        topic: '',
+        minutes: ''
+    });
     const [submitted, setSubmitted] = useState(false);
 
     const handleInputChange = event => {
@@ -73,15 +81,14 @@ const AddNote = () => {
             date: note.date,
             month: date.month,
             year: date.year,
-            startTime: note.startTime,
-            endTime: note.endTime,
+            start: note.start,
+            end: note.end,
             venue: note.venue,
             topic: note.topic,
             minutes: note.minutes
         } 
         try{
-            NoteDataService.create(data)
-            .then(response => {
+            NoteDataService.create(data).then(response => {
                 setNote({
                     author: response.data.author,
                     cdsGroup: response.data.cdsGroup,
@@ -89,8 +96,8 @@ const AddNote = () => {
                     date: response.data.date,
                     month: response.data.month,
                     year: response.data.year,
-                    startTime: response.data.startTime,
-                    endTime: response.data.endTime,
+                    start: response.data.start,
+                    end: response.data.end,
                     venue: response.data.venue,
                     topic: response.data.topic,
                     minutes: response.data.minutes
@@ -146,47 +153,48 @@ const AddNote = () => {
               <form className="bg-white sm:shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     {/* AUTHOR AND CDS */}
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                        {/* AUTHOR */}
-                        <div className="mb-4">
-                            <div className={`relative group py-2 rounded text-sm w-full shadow-sm border border-1 border-gray-300  appearance-none rounded focus:outline-none focus:shadow-outline focus:border hover:border-2 hover:border-green-400`}>
-                                <div className="absolute -top-3">
-                                    <label className="inline px-2 bg-white text-gray-700 group-hover:text-green-500 text-xs font-bold" for="author">
-                                        Author
-                                    </label>
+                            {/* AUTHOR */}
+                            <div className="mb-4">
+                                <div className={`relative group py-2 rounded text-sm w-full shadow-sm border border-1 border-gray-300  appearance-none rounded focus:outline-none focus:shadow-outline focus:border hover:border-2 hover:border-green-400`}>
+                                    <div className="absolute -top-3">
+                                        <label className="inline px-2 bg-white text-gray-700 group-hover:text-green-500 text-xs font-bold" for="author">
+                                            Author
+                                        </label>
+                                    </div>
+                                    <input 
+                                        type={'text'}
+                                        name={'author'}
+                                        value={note.author}
+                                        className={'border-0 text-xs md:text-sm w-full text-gray-700  py-2 px-2 leading-loose font-medium focus:ring-0 focus:outline-0 text-uppercase'}
+                                        onChange={handleInputChange}
+                                        required />   
                                 </div>
-                                <input 
-                                    type={'text'}
-                                    name={'author'}
-                                    value={note.author}
+                                
+                            </div>
+                            {/* CDS GROUP */}
+                            <div className="mb-4">
+                                <div className="relative group py-2 rounded text-sm w-full shadow-sm border border-1 border-gray-300  appearance-none rounded focus:outline-none focus:shadow-outline focus:border hover:border-2 hover:border-green-400">
+                                    <div className="absolute -top-3">
+                                        <label className="inline px-2 bg-white text-gray-700 group-hover:text-green-500 text-xs font-bold" for="cdsGroup">
+                                            C.D.S Group
+                                        </label>
+                                    </div>
+                                    <select 
+                                    name={'cdsGroup'}
                                     className={'border-0 text-xs md:text-sm w-full text-gray-700  py-2 px-2 leading-loose font-medium focus:ring-0 focus:outline-0 text-uppercase'}
                                     onChange={handleInputChange}
-                                    required />   
-                            </div>
-                            
-                        </div>
-                        {/* CDS GROUP */}
-                        <div className="mb-4">
-                            <div className="relative group py-2 rounded text-sm w-full shadow-sm border border-1 border-gray-300  appearance-none rounded focus:outline-none focus:shadow-outline focus:border hover:border-2 hover:border-green-400">
-                                <div className="absolute -top-3">
-                                    <label className="inline px-2 bg-white text-gray-700 group-hover:text-green-500 text-xs font-bold" for="cdsGroup">
-                                        C.D.S Group
-                                    </label>
+                                    required >
+                                        <option>Select CDS Group</option>
+                                        <option value={'ICT'}>Information Communication Technology (ICT)</option>
+                                        <option value={'Band'}>Band</option>
+                                    </select>
                                 </div>
-                                <select 
-                                name={'cdsGroup'}
-                                className={'border-0 text-xs md:text-sm w-full text-gray-700  py-2 px-2 leading-loose font-medium focus:ring-0 focus:outline-0 text-uppercase'}
-                                onChange={handleInputChange}
-                                required >
-                                    <option>Select CDS Group</option>
-                                    <option value={'ICT'}>Information Communication Technology (ICT)</option>
-                                    <option value={'Band'}>Band</option>
-                                </select>
                             </div>
-                        </div>
+                       
+                            
                     </div>
                     <div className="flex flex-col md:flex-row md:justify-between mb-4">
                         <div className="flex flex-col md:flex-row md:items-center">
-                            {/* TYPE OF EVENT */}
                             <div className="mb-4 md:mr-4">
                                 <div className={`relative group py-2 rounded text-sm w-full shadow-sm border border-1 border-gray-300  appearance-none rounded focus:outline-none focus:shadow-outline focus:border hover:border-2 hover:border-green-400`}>
                                     <div className="absolute -top-3">
@@ -261,7 +269,7 @@ const AddNote = () => {
                                         <input 
                                         type={'time'}
                                         name={'startTime'}
-                                        value={note.startTime}
+                                        value={note.start}
                                         className={'border-1 rounded ring-0 focus:outline-0 focus:ring-0 checked:text-green-400'}
                                         onChange={handleInputChange}
                                         
@@ -272,7 +280,7 @@ const AddNote = () => {
                                         <input 
                                         type={'time'}
                                         name={'endTime'}
-                                        value={note.endTime}
+                                        value={note.end}
                                         className={'border-1 rounded ring-0 focus:outline-0 focus:ring-0 checked:text-green-400'}
                                         onChange={handleInputChange}
                                         required />

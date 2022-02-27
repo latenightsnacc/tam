@@ -17,7 +17,7 @@ exports.create = (req, res) => {
         month: req.body.month,
         year: req.body.year,
         startTime: req.body.startTime,
-        endTime: req.body.endTime,
+        endTime: req.body.end,
         venue: req.body.venue,
         topic: req.body.topic,
         minutes: req.body.minutes
