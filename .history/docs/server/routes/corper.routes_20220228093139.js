@@ -1,0 +1,11 @@
+module.exports = app => {
+    const corper = require("../controllers/corper.controller");
+    const uploadController = require("../controllers/upload.controller");
+    const upload = require("../middleware/upload");
+    // const dashboard = require("../controllers/memberdashboard.controller");
+    const router = require("express").Router();
+    router.post("/", upload.single("profilePic") corper.createCorper);
+    router.post("/", upload.single("profilePic") ,uploadController.uploadFiles);
+    // router.get("/member", dashboard.getMemberDashboard);
+    app.use('/api/corpers', router);
+}
